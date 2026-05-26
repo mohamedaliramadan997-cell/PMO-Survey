@@ -374,8 +374,7 @@ function buildQuestion(q){
 // ─── PAGE BUILDERS ────────────────────────────────────────────────────────────
 function buildApp(){
   const prog=S.step<TOTAL?(S.step/TOTAL)*100:100;
-  const configWarn=SCRIPT_URL==='https://script.google.com/macros/s/AKfycbwYP9vSnPI_A_Oj3gmlMN2-R_N0hnBAOODPBEOdVm98JrKejAPBZhk1KmeBqsSpVQuC/exec'?
-    `<div class="cfg-warn">⚠️ <strong>Setup required:</strong> Open this HTML file in a text editor and replace <code>https://script.google.com/macros/s/AKfycbwYP9vSnPI_A_Oj3gmlMN2-R_N0hnBAOODPBEOdVm98JrKejAPBZhk1KmeBqsSpVQuC/exec</code> with your deployed Google Apps Script URL before sharing the survey.</div>`:'';
+  const configWarn='';
   return `
     <div class="hdr">
       <div>

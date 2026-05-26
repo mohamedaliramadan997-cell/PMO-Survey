@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PMO Team Capability Survey 2026 — NES Advantage</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Calibri','Segoe UI',sans-serif;background:#F2F2F2;min-height:100vh}
+.hdr{position:sticky;top:0;z-index:100;background:#2B2B34;border-bottom:4px solid #F4D618;padding:16px 24px;display:flex;align-items:center;justify-content:space-between}
+.hdr-logo{display:flex;align-items:center;gap:10px}
+.logo-sq{width:20px;height:20px;background:#F4D618;border-radius:2px;flex-shrink:0}
+.logo-nes{color:#fff;font-weight:700;font-size:17px}
+.logo-adv{color:#aaa;font-weight:400;font-size:17px}
+.logo-sub{font-size:9px;color:#777;letter-spacing:1.5px;text-transform:uppercase;margin-top:3px}
+.hdr-right{font-size:10px;color:#777;letter-spacing:1px;text-transform:uppercase;text-align:right}
+.prog-track{height:6px;background:#4A4B52}
+.prog-fill{height:100%;background:#F4D618;transition:width .4s ease}
+.content{max-width:760px;margin:0 auto;padding:28px 16px 60px}
+.intro{background:#2B2B34;border-left:6px solid #F4D618;border-radius:4px;padding:20px 24px;margin-bottom:20px}
+.intro-lbl{font-size:10px;color:#F4D618;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px}
+.intro-ttl{font-size:20px;font-weight:700;color:#fff;margin-bottom:8px}
+.intro-body{font-size:13px;color:#bbb;line-height:1.65;margin-bottom:14px}
+.intro-tags{display:flex;gap:10px;flex-wrap:wrap}
+.intro-tag{font-size:11px;color:#2B2B34;background:#F4D618;padding:4px 10px;border-radius:2px;font-weight:700}
+.card{background:#fff;border-radius:4px;box-shadow:0 1px 6px rgba(0,0,0,.07);margin-bottom:20px}
+.card-head{background:#2B2B34;border-left:6px solid #F4D618;padding:20px 24px;border-radius:4px 4px 0 0}
+.card-step{font-size:11px;color:#F4D618;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.card-title{font-size:22px;font-weight:700;color:#fff;margin-bottom:4px}
+.card-sub{font-size:12px;color:#bbb;line-height:1.55}
+.card-body{padding:28px 28px 12px}
+.card-nav{padding:20px 28px;border-top:1px solid #F2F2F2;display:flex;justify-content:space-between;align-items:center}
+button{font-family:'Calibri','Segoe UI',sans-serif}
+.btn-primary{background:#F4D618;color:#2B2B34;font-size:14px;font-weight:700;padding:12px 28px;border-radius:3px;border:none;cursor:pointer}
+.btn-primary:disabled{opacity:.7;cursor:wait}
+.btn-sec{background:transparent;border:1px solid #D8D8D8;color:#4A4B52;font-size:14px;padding:12px 24px;border-radius:3px;cursor:pointer}
+.btn-green{background:#2D7D46;color:#fff;font-size:12px;font-weight:600;padding:8px 16px;border-radius:3px;border:none;cursor:pointer}
+.btn-red{background:#C0392B;color:#fff;font-size:12px;font-weight:600;padding:8px 16px;border-radius:3px;border:none;cursor:pointer}
+.btn-ghost{background:#3a3a42;color:#ccc;font-size:12px;padding:8px 16px;border-radius:3px;border:1px solid #4A4B52;cursor:pointer}
+.btn-yellow{background:#F4D618;color:#2B2B34;font-size:13px;font-weight:700;padding:10px 20px;border-radius:3px;border:none;cursor:pointer}
+.btn-sml-red{background:#C0392B;color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:2px;border:none;cursor:pointer}
+.btn-sml-ghost{background:#3a3a42;color:#ccc;font-size:11px;padding:4px 10px;border-radius:2px;border:1px solid #4A4B52;cursor:pointer}
+.q-wrap{margin-bottom:24px}
+.q-lbl{font-size:15px;color:#2B2B34;margin-bottom:12px;line-height:1.5;font-weight:500}
+.q-req{color:#C0392B;margin-left:4px}
+.q-err{color:#C0392B;font-size:12px;margin-top:6px}
+.scale-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.scale-lbl{font-size:11px;color:#4A4B52;min-width:90px;line-height:1.3}
+.scale-lbl-l{text-align:right}
+.scale-dots{display:flex;gap:10px}
+.sdot{width:44px;height:44px;border-radius:50%;border:2px solid #D8D8D8;background:#fff;color:#4A4B52;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.sdot.on{border-color:#F4D618;background:#F4D618;color:#2B2B34}
+.grid-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid #F2F2F2}
+.grid-hdr-nums{display:flex;gap:8px}
+.grid-hdr-n{width:36px;text-align:center;font-size:12px;font-weight:700;color:#4A4B52}
+.grid-row{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid #F2F2F2}
+.grid-row:last-child{border-bottom:none}
+.grid-lbl{font-size:13px;color:#2B2B34;flex:1;padding-right:16px;line-height:1.4}
+.grid-dots{display:flex;gap:8px;flex-shrink:0}
+.gdot{width:36px;height:36px;border-radius:50%;border:2px solid #D8D8D8;background:#fff;color:#4A4B52;font-size:13px;font-weight:600;cursor:pointer}
+.gdot.on{border-color:#F4D618;background:#F4D618;color:#2B2B34}
+.chk-item{display:flex;align-items:flex-start;gap:10px;padding:6px 0;cursor:pointer}
+.chk-item input[type=checkbox]{margin-top:2px;accent-color:#F4D618;width:16px;height:16px;flex-shrink:0;cursor:pointer}
+.chk-lbl{font-size:14px;color:#2B2B34;line-height:1.5}
+.ft-ta{min-height:64px;border:1.5px solid #F4D618;background:#FFFBE6;border-radius:3px;padding:8px 12px;font-family:inherit;font-size:13px;color:#2B2B34;resize:vertical;outline:none;display:block;width:calc(100% - 26px);margin-left:26px;margin-top:4px;margin-bottom:8px}
+.srv-ta{width:100%;min-height:100px;border:1px solid #D8D8D8;border-radius:3px;padding:10px 12px;font-family:inherit;font-size:14px;color:#2B2B34;resize:vertical;outline:none;background:#fff}
+.success{text-align:center;padding:60px 20px}
+.success-icon{font-size:64px;margin-bottom:20px}
+.success-ttl{font-size:24px;font-weight:700;color:#2B2B34;margin-bottom:12px}
+.success-body{font-size:15px;color:#4A4B52;max-width:480px;margin:0 auto 32px;line-height:1.7}
+.adm-toggle{text-align:center;margin-top:60px}
+.adm-toggle-btn{background:transparent;border:none;font-size:10px;color:#aaa;cursor:pointer;letter-spacing:.5px;font-family:inherit}
+.adm-panel{background:#2B2B34;border-radius:4px;overflow:hidden;margin-top:60px}
+.adm-topbar{background:#1f1f26;border-bottom:2px solid #F4D618;padding:14px 20px;display:flex;justify-content:space-between;align-items:center}
+.adm-topbar-ttl{font-size:12px;font-weight:700;color:#F4D618;letter-spacing:.5px}
+.adm-close{background:transparent;border:none;color:#777;font-size:18px;cursor:pointer;line-height:1}
+.adm-login{padding:32px 20px;text-align:center}
+.adm-login-hint{font-size:13px;color:#999;margin-bottom:14px}
+.adm-login-row{display:flex;gap:8px;justify-content:center;align-items:center}
+.adm-key-input{font-family:inherit;font-size:14px;padding:10px 16px;border-radius:3px;border:1px solid #4A4B52;background:#3a3a42;color:#fff;width:200px;text-align:center;outline:none}
+.adm-inner{padding:20px}
+.stats-row{display:flex;gap:12px;margin-bottom:18px}
+.stat-box{flex:1;background:#3a3a42;border-radius:4px;padding:12px 16px}
+.stat-lbl{font-size:10px;color:#888;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.stat-val{font-size:26px;font-weight:700;color:#F4D618}
+.act-row{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;align-items:center}
+.confirm-del{display:flex;align-items:center;gap:8px;background:#3a1a1a;border:1px solid #C0392B;border-radius:3px;padding:6px 12px}
+.confirm-del-txt{font-size:11px;color:#ffaaaa}
+.tabs-row{display:flex;gap:4px;margin-bottom:20px;flex-wrap:wrap}
+.tab-btn{font-family:inherit;font-size:12px;font-weight:600;padding:8px 14px;border-radius:3px;border:none;cursor:pointer;background:#3a3a42;color:#ccc}
+.tab-btn.on{background:#F4D618;color:#2B2B34}
+.tab-pane{background:#fff;border-radius:4px;padding:20px}
+.no-resp{text-align:center;padding:40px;font-size:14px;color:#bbb}
+.adm-err{background:#3a1a1a;border:1px solid #C0392B;border-radius:4px;padding:12px 16px;margin-bottom:16px;font-size:13px;color:#ffaaaa}
+.dlbl{font-size:12px;font-weight:700;color:#2B2B34;margin-bottom:10px;margin-top:4px;text-transform:uppercase;letter-spacing:.5px}
+.score-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:28px}
+.sw{background:#fff;border:1px solid #D8D8D8;border-radius:4px;padding:14px 16px}
+.sw-lbl{font-size:11px;color:#4A4B52;margin-bottom:8px;line-height:1.4}
+.sw-body{display:flex;align-items:flex-end;justify-content:space-between;gap:8px}
+.sw-num{font-size:30px;font-weight:700;line-height:1}
+.sw-den{font-size:10px;color:#4A4B52;margin-top:3px}
+.sw-anc{display:flex;justify-content:space-between;margin-top:6px}
+.sw-anc span{font-size:9px;color:#4A4B52}
+.dbar{display:flex;gap:3px;height:40px;align-items:flex-end}
+.dc{display:flex;flex-direction:column;align-items:center;gap:2px}
+.dc-bar{width:18px;border-radius:2px 2px 0 0}
+.dc-n{font-size:9px;color:#4A4B52}
+.chart-box{background:#fff;border:1px solid #D8D8D8;border-radius:4px;padding:14px 16px;margin-bottom:28px}
+.hbar{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.hbar-lbl{font-size:11px;color:#2B2B34;line-height:1.3;width:240px;flex-shrink:0;word-break:break-word}
+.hbar-track{flex:1;background:#F2F2F2;border-radius:2px;height:18px;overflow:hidden}
+.hbar-fill{height:100%;border-radius:2px;transition:width .4s}
+.hbar-val{font-size:12px;color:#4A4B52;min-width:20px;text-align:right}
+.cap-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.cap-lbl{font-size:11px;color:#2B2B34;line-height:1.3;flex:1}
+.cap-track{width:180px;background:#F2F2F2;border-radius:2px;height:16px;overflow:hidden;flex-shrink:0}
+.cap-fill{height:100%;border-radius:2px}
+.cap-val{font-size:12px;font-weight:700;min-width:28px}
+.legend{font-size:11px;color:#4A4B52;margin-bottom:12px}
+.ovf-x{overflow-x:auto}
+.gtbl{border-collapse:collapse;font-size:11px;width:100%}
+.gtbl th{background:#2B2B34;padding:8px 10px;font-weight:600}
+.gtbl th.lh{color:#fff;text-align:left;min-width:200px}
+.gtbl th.rh{color:#F4D618;text-align:center;min-width:48px}
+.gtbl td{padding:6px 10px}
+.gtbl td.ll{color:#2B2B34;line-height:1.3}
+.gtbl td.rv{text-align:center;font-weight:700}
+.gtbl td.av{text-align:center;font-weight:700;background:#f5f5e8}
+.gtbl tr:nth-child(even){background:#F2F2F2}
+.gtbl tr:nth-child(odd){background:#fff}
+.qblock{border-left:3px solid #F4D618;background:#FFFBE6;padding:8px 12px;margin-bottom:8px;border-radius:0 3px 3px 0;font-size:13px;color:#2B2B34;line-height:1.6}
+.resp-card{border:1px solid #D8D8D8;border-radius:4px;margin-bottom:10px;overflow:hidden}
+.resp-hdr{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;cursor:pointer}
+.resp-hdr-l{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.rbadge{font-size:10px;color:#fff;padding:2px 7px;border-radius:2px}
+.resp-body{padding:16px 20px}
+.rsec{font-size:11px;font-weight:700;color:#F4D618;background:#2B2B34;padding:4px 10px;margin-bottom:10px;margin-top:14px;border-radius:2px;display:inline-block}
+.rsec:first-child{margin-top:0}
+.fld{margin-bottom:10px}
+.fld.hi{border-left:3px solid #F4D618;background:#FFFBE6;padding:6px 10px;border-radius:0 3px 3px 0}
+.fld-lbl{font-size:10px;color:#4A4B52;text-transform:uppercase;letter-spacing:.6px;margin-bottom:2px}
+.fld-val{font-size:13px;color:#2B2B34;line-height:1.5}
+.cap2col{display:grid;grid-template-columns:1fr 1fr;gap:2px 16px}
+.cmini{display:flex;align-items:center;gap:6px;padding:3px 0;border-bottom:1px solid #F2F2F2}
+.cmini-lbl{font-size:11px;color:#2B2B34;flex:1;line-height:1.3}
+.cmini-val{font-size:13px;font-weight:700;flex-shrink:0}
+.cfg-warn{background:#fff3cd;border:1px solid #ffc107;border-radius:4px;padding:12px 16px;margin-bottom:20px;font-size:13px;color:#856404;line-height:1.5}
+@media(max-width:600px){
+  .score-grid{grid-template-columns:1fr}
+  .hbar-lbl{width:150px}
+  .scale-lbl{min-width:60px;font-size:10px}
+  .card-body{padding:20px 16px 8px}
+  .card-nav{padding:16px}
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+// ─── CONFIGURATION ────────────────────────────────────────────────────────────
+// Replace the value below with your deployed Google Apps Script URL
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwYP9vSnPI_A_Oj3gmlMN2-R_N0hnBAOODPBEOdVm98JrKejAPBZhk1KmeBqsSpVQuC/exec';
+const ADMIN_CODE  = 'NESadmin2025';
+
+// ─── DATA ─────────────────────────────────────────────────────────────────────
+const CAPABILITIES = [
+  {id:'cap_fieldglass',      label:'Fieldglass / VMS system proficiency'},
+  {id:'cap_governance',      label:'Current MSP programme governance including (BH / NES policies and processes)'},
+  {id:'cap_hiring',          label:'Hiring process from intake to candidate start'},
+  {id:'cap_shortlisting',    label:'Candidate shortlisting and MSP sourcing best practices'},
+  {id:'cap_benchmarking',    label:'NTE and Market salary benchmarking process'},
+  {id:'cap_assignment',      label:'Assignment management (extensions, revisions, offboarding)'},
+  {id:'cap_new_supplier',    label:'New suppliers discussion; including introducing MSP, checking eligibility to join the programme and transfer to SCM for onboarding'},
+  {id:'cap_supplier_rel',    label:'Supplier relationship management including scorecard review and performance meetings'},
+  {id:'cap_stakeholder_mgr', label:'Stakeholder engagement with line managers and product line managers level'},
+  {id:'cap_stakeholder_dir', label:'Stakeholder engagement with segment / function directors'},
+  {id:'cap_stakeholder_ops', label:'Stakeholder engagement with P&C and Sourcing teams'},
+  {id:'cap_commercial',      label:'Commercial awareness (Existing suppliers costs, contract terms and metrics)'},
+  {id:'cap_data',            label:'Data analysis and reporting skills'},
+  {id:'cap_presentation',    label:'Presentation skills'},
+  {id:'cap_mathematical',    label:'Mathematical skills'},
+  {id:'cap_problem_solving', label:'Problem solving skills'},
+  {id:'cap_classification',  label:'Understanding contingent workers classification'},
+  {id:'cap_difficult',       label:'Handling difficult conversations (clients or suppliers)'},
+  {id:'cap_role_goals',      label:'Understanding the overall role goals and objectives'},
+  {id:'cap_strategy',        label:'Understanding NES Advantage programme strategy and objectives'},
+];
+
+const CHALLENGE_OPTIONS = [
+  {label:'Workload',freeText:false},
+  {label:'Time management and organising priorities',freeText:false},
+  {label:'Unclear adhoc requests that are time consuming',freeText:true,placeholder:'Please describe the types of adhoc requests that affect you most...'},
+  {label:'Much manual work required',freeText:true,placeholder:'Please describe which tasks involve the most manual effort...'},
+  {label:'Unclear of the value of tasks required',freeText:true,placeholder:'Please describe which tasks feel unclear in their purpose or value...'},
+  {label:'System literacy',freeText:false},
+  {label:'Supplier metrics, contract terms and commercials',freeText:false},
+  {label:'Managing conversations with new suppliers to evaluate eligibility to join MSP and negotiate quotations',freeText:false},
+  {label:'Engaging senior stakeholders (Ops / Sourcing directors and segment leads)',freeText:false},
+  {label:'Managing workers classification reviews and PW to MSP conversions',freeText:false},
+  {label:'Presenting thoughts, ideas, data and findings',freeText:false},
+  {label:'Driving the process — e.g. NTE compliance, managing supplier poor performance, following up on delayed actions from stakeholders',freeText:false},
+  {label:'Working across time zones and with remote stakeholders',freeText:false},
+  {label:'Other',freeText:true,placeholder:'Please describe any other challenges not listed above...'},
+];
+const FT_KEYS = CHALLENGE_OPTIONS.filter(o=>o.freeText).map(o=>o.label);
+
+const SUPPORT_OPTIONS = [
+  'Formal training or structured workshops',
+  'On-the-job coaching from my manager',
+  'Mentoring from a senior MSP professional',
+  'Access to industry tools, frameworks and reference materials',
+  'Peer learning and knowledge sharing within the team',
+  'Clear process documentation and standard operating procedures (SOPs)',
+  'Ready-to-use conversation frameworks and engagement playbooks',
+  'Exposure to commercial and strategic programme decisions',
+  'Reduced transactional workload to create capacity for development',
+  'Better system tools and automation to reduce manual effort',
+];
+
+const SECTIONS = [
+  {id:'s1',step:'SECTION 1 OF 4',title:'Role Evolution',
+   sub:"Help us understand how you perceive the way your role has changed and developed over time. Your perspective is important in shaping the team's direction.",
+   questions:[
+    {id:'role_changed',type:'scale',req:true,label:'My role today is significantly different from when I first started in it.',lbl:'Strongly Disagree',rbl:'Strongly Agree'},
+    {id:'role_expectations_clear',type:'scale',req:true,label:'I have a clear understanding of what is expected of me in my current role.',lbl:'Strongly Disagree',rbl:'Strongly Agree'},
+    {id:'role_evolved_open',type:'textarea',req:false,label:'In your own words, how would you describe how your role has evolved? What feels most different today compared to when you started?',ph:'Share your honest perspective — there are no right or wrong answers.'},
+  ]},
+  {id:'s2',step:'SECTION 2 OF 4',title:'Capability Self-Assessment',
+   sub:'Rate your current confidence level honestly in each area. This is not a performance review — it is a tool to identify where support and development are most needed across the team.',
+   questions:[{id:'capabilities_grid',type:'rating_grid',req:false,label:''}]},
+  {id:'s3',step:'SECTION 3 OF 4',title:'Challenges & Struggles',
+   sub:'Your honest input here is the most valuable part of this survey. Understanding what makes your work difficult is how we build the right support — this information will not be used to evaluate individual performance.',
+   questions:[
+    {id:'day_confidence',type:'scale',req:true,label:'I feel confident handling my current day-to-day responsibilities.',lbl:'Strongly Disagree',rbl:'Strongly Agree'},
+    {id:'top_challenges',type:'multicheck',req:false,label:'Which of the following do you find most challenging in your current role? (Select all that apply)',options:CHALLENGE_OPTIONS},
+    {id:'challenges_open',type:'textarea',req:false,label:'Please describe all the challenges and struggles you are currently facing in your day-to-day responsibilities. Be as specific as possible.',ph:'Use this space to elaborate on any of the above, or raise challenges not covered by the options. Your response is completely anonymous.'},
+  ]},
+  {id:'s4',step:'SECTION 4 OF 4',title:'What You Need to Excel',
+   sub:'Help us understand what development, resources and support would make the greatest difference to your effectiveness in this role.',
+   questions:[
+    {id:'skills_confidence',type:'scale',req:true,label:'I feel confident of the skills I have to contribute to the current role responsibilities.',lbl:'Strongly Disagree',rbl:'Strongly Agree'},
+    {id:'support_types',type:'multicheck',req:false,label:'What types of support would most help you develop in your role? (Select all that apply)',options:SUPPORT_OPTIONS},
+    {id:'skill_priorities_open',type:'textarea',req:false,label:'Which skill areas would you most like to develop?',ph:'Please describe the skill areas you feel would most benefit your development in this role...'},
+    {id:'help_prepared',type:'textarea',req:false,label:'What would help you feel most prepared and confident in managing the responsibilities of your current PMO role?',ph:'e.g. specific training, clearer processes, better tools, more context on programme objectives, practice scenarios...'},
+    {id:'other_comments',type:'textarea',req:false,label:'Is there anything else you would like to share with your manager? Any feedback, suggestions or observations not covered in this survey.',ph:'Open space — any additional thoughts are welcome.'},
+  ]},
+];
+const TOTAL = SECTIONS.length;
+
+// ─── HELPERS ──────────────────────────────────────────────────────────────────
+function esc(s){if(!s&&s!==0)return '';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function escJ(s){if(!s&&s!==0)return '';return String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'");}
+function initAnswers(){
+  const a={role_changed:0,role_expectations_clear:0,role_evolved_open:'',
+    day_confidence:0,top_challenges:[],challenges_open:'',
+    skills_confidence:0,support_types:[],skill_priorities_open:'',help_prepared:'',other_comments:''};
+  CAPABILITIES.forEach(c=>{a[c.id]=0;});
+  FT_KEYS.forEach(k=>{a['top_challenges__ft__'+k]='';});
+  return a;
+}
+function scCol(v){if(!v||v<2.5)return '#C0392B';if(v<=3.5)return '#C87D2A';return '#2D7D46';}
+function avgOf(rs,f){const v=rs.map(r=>r.data&&r.data[f]).filter(v=>typeof v==='number'&&v>0);return v.length?v.reduce((a,b)=>a+b,0)/v.length:0;}
+function distOf(rs,f){const d={1:0,2:0,3:0,4:0,5:0};rs.forEach(r=>{const v=r.data&&r.data[f];if(v>=1&&v<=5)d[v]++;});return d;}
+function freqOf(rs,f){const c={};rs.forEach(r=>{(r.data&&r.data[f]||[]).forEach(v=>{c[v]=(c[v]||0)+1;});});return c;}
+
+// ─── STATE ────────────────────────────────────────────────────────────────────
+let S={
+  step:0, answers:initAnswers(), errors:{}, submitting:false,
+  showAdmin:false, adminUnlocked:false, adminKey:'', adminTab:'overview',
+  responses:[], adminLoading:false, adminError:'', confirmingClear:false, expanded:{}
+};
+
+// ─── CAPTURE & RENDER ─────────────────────────────────────────────────────────
+function capture(){
+  document.querySelectorAll('[data-ans]').forEach(el=>{
+    const k=el.dataset.ans; if(k)S.answers[k]=el.value;
+  });
+  const ki=document.getElementById('admKeyInput');
+  if(ki)S.adminKey=ki.value;
+}
+function render(){
+  document.getElementById('app').innerHTML=buildApp();
+}
+
+// ─── VALIDATION ───────────────────────────────────────────────────────────────
+function validate(idx){
+  const errs={};
+  SECTIONS[idx].questions.forEach(q=>{
+    if(!q.req)return;
+    const v=S.answers[q.id];
+    if(q.type==='scale'&&(!v||v===0))errs[q.id]='Please select a rating to continue.';
+    if(q.type==='textarea'&&!v)errs[q.id]='This field is required.';
+    if(q.type==='multicheck'&&(!v||!v.length))errs[q.id]='Please select at least one option.';
+  });
+  S.errors=errs;
+  return !Object.keys(errs).length;
+}
+
+// ─── QUESTION BUILDERS ────────────────────────────────────────────────────────
+function buildScale(q){
+  const v=S.answers[q.id]||0;
+  const dots=[1,2,3,4,5].map(n=>`<button class="sdot${v===n?' on':''}" onclick="scaleClick('${q.id}',${n})">${n}</button>`).join('');
+  return `<div class="q-wrap">
+    <div class="q-lbl">${esc(q.label)}${q.req?'<span class="q-req">*</span>':''}</div>
+    <div class="scale-row">
+      <span class="scale-lbl scale-lbl-l">${esc(q.lbl)}</span>
+      <div class="scale-dots">${dots}</div>
+      <span class="scale-lbl">${esc(q.rbl)}</span>
+    </div>
+    ${S.errors[q.id]?`<div class="q-err">${esc(S.errors[q.id])}</div>`:''}
+  </div>`;
+}
+
+function buildRatingGrid(){
+  const nums=[1,2,3,4,5].map(n=>`<div class="grid-hdr-n">${n}</div>`).join('');
+  const rows=CAPABILITIES.map(cap=>{
+    const v=S.answers[cap.id]||0;
+    const dots=[1,2,3,4,5].map(n=>`<button class="gdot${v===n?' on':''}" onclick="ratingClick('${cap.id}',${n})">${n}</button>`).join('');
+    return `<div class="grid-row"><div class="grid-lbl">${esc(cap.label)}</div><div class="grid-dots">${dots}</div></div>`;
+  }).join('');
+  return `<div>
+    <div class="grid-hdr">
+      <span style="font-size:12px;color:#4A4B52;font-style:italic">Rate your confidence in each area</span>
+      <div style="display:flex;align-items:center;gap:6px">
+        <span style="font-size:10px;color:#4A4B52">Not confident</span>
+        <div class="grid-hdr-nums">${nums}</div>
+        <span style="font-size:10px;color:#4A4B52">Fully confident</span>
+      </div>
+    </div>
+    ${rows}
+  </div>`;
+}
+
+function buildMultiCheck(q){
+  const val=S.answers[q.id]||[];
+  const opts=(q.options||[]).map(o=>typeof o==='string'?{label:o,freeText:false}:o);
+  const rows=opts.map(opt=>{
+    const checked=val.includes(opt.label);
+    const disabled=!!(q.maxSel&&!checked&&val.length>=q.maxSel);
+    const ftKey='top_challenges__ft__'+opt.label;
+    const ftArea=opt.freeText&&checked?`<textarea class="ft-ta" data-ans="${esc(ftKey)}" placeholder="${esc(opt.placeholder||'')}">${esc(S.answers[ftKey]||'')}</textarea>`:'';
+    return `<div>
+      <label class="chk-item" style="${disabled?'opacity:.4;pointer-events:none':''}">
+        <input type="checkbox" ${checked?'checked':''} ${disabled?'disabled':''}
+          onchange="chkChange('${escJ(q.id)}','${escJ(opt.label)}',${q.maxSel||0},this.checked)">
+        <span class="chk-lbl">${esc(opt.label)}</span>
+      </label>
+      ${ftArea}
+    </div>`;
+  }).join('');
+  return `<div class="q-wrap">
+    <div class="q-lbl">${esc(q.label)}${q.maxSel?`<span style="font-size:12px;color:#4A4B52;font-weight:400"> (select up to ${q.maxSel})</span>`:''}</div>
+    ${rows}
+    ${S.errors[q.id]?`<div class="q-err">${esc(S.errors[q.id])}</div>`:''}
+  </div>`;
+}
+
+function buildTextarea(q){
+  return `<div class="q-wrap">
+    <div class="q-lbl">${esc(q.label)}</div>
+    <textarea class="srv-ta" data-ans="${q.id}" placeholder="${esc(q.ph||'')}">${esc(S.answers[q.id]||'')}</textarea>
+    ${S.errors[q.id]?`<div class="q-err">${esc(S.errors[q.id])}</div>`:''}
+  </div>`;
+}
+
+function buildQuestion(q){
+  if(q.type==='rating_grid')return buildRatingGrid();
+  if(q.type==='scale')return buildScale(q);
+  if(q.type==='multicheck')return buildMultiCheck(q);
+  if(q.type==='textarea')return buildTextarea(q);
+  return '';
+}
+
+// ─── PAGE BUILDERS ────────────────────────────────────────────────────────────
+function buildApp(){
+  const prog=S.step<TOTAL?(S.step/TOTAL)*100:100;
+  const configWarn=SCRIPT_URL==='https://script.google.com/macros/s/AKfycbwYP9vSnPI_A_Oj3gmlMN2-R_N0hnBAOODPBEOdVm98JrKejAPBZhk1KmeBqsSpVQuC/exec'?
+    `<div class="cfg-warn">⚠️ <strong>Setup required:</strong> Open this HTML file in a text editor and replace <code>https://script.google.com/macros/s/AKfycbwYP9vSnPI_A_Oj3gmlMN2-R_N0hnBAOODPBEOdVm98JrKejAPBZhk1KmeBqsSpVQuC/exec</code> with your deployed Google Apps Script URL before sharing the survey.</div>`:'';
+  return `
+    <div class="hdr">
+      <div>
+        <div class="hdr-logo"><div class="logo-sq"></div><span class="logo-nes">NES</span><span class="logo-adv"> ADVANTAGE</span></div>
+        <div class="logo-sub">MSP · MENATI REGION</div>
+      </div>
+      <div class="hdr-right">PMO TEAM / CAPABILITY SURVEY</div>
+    </div>
+    <div class="prog-track"><div class="prog-fill" style="width:${prog}%"></div></div>
+    <div class="content">
+      ${configWarn}
+      ${S.step===TOTAL?buildSuccess():buildSurveyStep()}
+      ${buildAdminSection()}
+    </div>`;
+}
+
+function buildSuccess(){
+  return `<div class="success">
+    <div class="success-icon">✅</div>
+    <div class="success-ttl">Thank you — your response has been recorded.</div>
+    <div class="success-body">Your answers will be reviewed by the MENATI Regional Operations Manager and used to shape the team upskilling plan. Your input is genuinely appreciated.</div>
+    <button class="btn-sec" onclick="handleReset()">← Submit another response</button>
+  </div>`;
+}
+
+function buildSurveyStep(){
+  const sec=SECTIONS[S.step];
+  const intro=S.step===0?`<div class="intro">
+    <div class="intro-lbl">MENATI REGIONAL OPERATIONS — CONFIDENTIAL</div>
+    <div class="intro-ttl">PMO Team Capability Survey 2026</div>
+    <div class="intro-body">This survey is completely anonymous — your individual responses will not be identified. It takes 10–12 minutes to complete and covers four areas: role evolution, capability self-assessment, challenges, and development needs. Your honest input directly shapes the team upskilling plan.</div>
+    <div class="intro-tags"><span class="intro-tag">4 Sections</span><span class="intro-tag">~30 Questions</span><span class="intro-tag">100% Anonymous</span></div>
+  </div>`:'';
+  const questions=sec.questions.map(q=>buildQuestion(q)).join('');
+  const backBtn=S.step>0?`<button class="btn-sec" onclick="handleBack()">← Back</button>`:`<div></div>`;
+  const nextLbl=S.submitting?'Submitting...':(S.step===TOTAL-1?'Submit Survey ✓':'Next →');
+  return `${intro}
+  <div class="card">
+    <div class="card-head">
+      <div class="card-step">${esc(sec.step)}</div>
+      <div class="card-title">${esc(sec.title)}</div>
+      <div class="card-sub">${esc(sec.sub)}</div>
+    </div>
+    <div class="card-body">${questions}</div>
+    <div class="card-nav">
+      ${backBtn}
+      <button class="btn-primary" onclick="handleNext()" ${S.submitting?'disabled':''}>${nextLbl}</button>
+    </div>
+  </div>`;
+}
+
+// ─── ADMIN SECTION ────────────────────────────────────────────────────────────
+function buildAdminSection(){
+  if(!S.showAdmin)return `<div class="adm-toggle"><button class="adm-toggle-btn" onclick="S.showAdmin=true;render()">▼ MANAGER ACCESS</button></div>`;
+  return `<div class="adm-panel">
+    <div class="adm-topbar">
+      <div class="adm-topbar-ttl">▼ MANAGER ACCESS — ADMIN PANEL</div>
+      <button class="adm-close" onclick="closeAdmin()">✕</button>
+    </div>
+    ${!S.adminUnlocked?buildAdminLogin():buildAdminDashboard()}
+  </div>`;
+}
+
+function buildAdminLogin(){
+  return `<div class="adm-login">
+    <div class="adm-login-hint">Enter the access code to view survey results</div>
+    <div class="adm-login-row">
+      <input id="admKeyInput" type="password" class="adm-key-input" placeholder="Access code"
+        onkeydown="if(event.key==='Enter')admLogin()" value="${esc(S.adminKey)}">
+      <button class="btn-yellow" onclick="admLogin()">Unlock</button>
+    </div>
+  </div>`;
+}
+
+function buildAdminDashboard(){
+  const TABS=[{id:'overview',lbl:'📊 Overview'},{id:'capabilities',lbl:'🎯 Capabilities'},
+    {id:'challenges',lbl:'⚠ Challenges'},{id:'development',lbl:'🚀 Development'},{id:'rawdata',lbl:'📋 All Responses'}];
+  const tabBtns=TABS.map(t=>`<button class="tab-btn${S.adminTab===t.id?' on':''}" onclick="setTab('${t.id}')">${t.lbl}</button>`).join('');
+  const clearBtn=S.confirmingClear?
+    `<div class="confirm-del"><span class="confirm-del-txt">Delete all responses? Cannot be undone.</span>
+      <button class="btn-sml-red" onclick="doClearAll()">Yes, delete</button>
+      <button class="btn-sml-ghost" onclick="S.confirmingClear=false;render()">Cancel</button>
+    </div>`:
+    `<button class="btn-red" onclick="S.confirmingClear=true;render()">🗑 Clear All</button>`;
+
+  let tabContent='';
+  if(S.adminLoading){tabContent=`<div class="no-resp">Loading responses…</div>`;}
+  else if(S.adminError){tabContent=`<div class="adm-err">⚠ ${esc(S.adminError)}<br><br>You can view all responses directly in your Google Sheet.</div>`;}
+  else if(!S.responses.length){tabContent=`<div class="no-resp">No responses yet — or click Refresh to load.</div>`;}
+  else{
+    if(S.adminTab==='overview')tabContent=buildOverviewTab();
+    else if(S.adminTab==='capabilities')tabContent=buildCapabilitiesTab();
+    else if(S.adminTab==='challenges')tabContent=buildChallengesTab();
+    else if(S.adminTab==='development')tabContent=buildDevelopmentTab();
+    else if(S.adminTab==='rawdata')tabContent=buildRawDataTab();
+  }
+
+  return `<div class="adm-inner">
+    <div class="stats-row">
+      <div class="stat-box"><div class="stat-lbl">Responses Received</div><div class="stat-val">${S.responses.length}</div></div>
+      <div class="stat-box"><div class="stat-lbl">Team Members</div><div class="stat-val">6</div></div>
+      <div class="stat-box"><div class="stat-lbl">Completion Rate</div><div class="stat-val">${Math.round((S.responses.length/6)*100)}%</div></div>
+    </div>
+    <div class="act-row">
+      <button class="btn-green" onclick="doExport()">⬇ Export to Excel</button>
+      <button class="btn-ghost" onclick="loadResponses()">↻ Refresh</button>
+      ${clearBtn}
+    </div>
+    <div class="tabs-row">${tabBtns}</div>
+    <div class="tab-pane">${tabContent}</div>
+  </div>`;
+}
+
+// ─── CHART HELPERS ────────────────────────────────────────────────────────────
+function buildHBar(label,val,max,color){
+  const pct=max>0?(val/max)*100:0;
+  return `<div class="hbar">
+    <div class="hbar-lbl">${esc(label)}</div>
+    <div class="hbar-track"><div class="hbar-fill" style="width:${pct}%;background:${color};min-width:${val>0?3:0}px"></div></div>
+    <div class="hbar-val">${val}</div>
+  </div>`;
+}
+
+function buildDistBar(d){
+  const maxV=Math.max(...Object.values(d),1);
+  return `<div class="dbar">${[1,2,3,4,5].map(n=>{
+    const h=maxV>0?Math.max(Math.round((d[n]/maxV)*36),d[n]>0?4:0):0;
+    const col=n<=2?'#C0392B':n===3?'#C87D2A':'#2D7D46';
+    return `<div class="dc"><div class="dc-bar" style="height:${h}px;background:${col}"></div><div class="dc-n">${n}</div></div>`;
+  }).join('')}</div>`;
+}
+
+function buildScoreWidget(label,avg,d){
+  const col=avg>0?scCol(avg):'#D8D8D8';
+  return `<div class="sw">
+    <div class="sw-lbl">${esc(label)}</div>
+    <div class="sw-body">
+      <div><div class="sw-num" style="color:${col}">${avg>0?avg.toFixed(1):'—'}</div><div class="sw-den">avg / 5</div></div>
+      ${buildDistBar(d)}
+    </div>
+    <div class="sw-anc"><span>Strongly disagree</span><span>Strongly agree</span></div>
+  </div>`;
+}
+
+function buildQuoteBlocks(rs,field){
+  return rs.map(r=>r.data&&r.data[field]).filter(v=>v&&String(v).trim())
+    .map(v=>`<div class="qblock">${esc(v)}</div>`).join('');
+}
+
+// ─── DASHBOARD TABS ───────────────────────────────────────────────────────────
+function buildOverviewTab(){
+  const rs=S.responses;
+  const sqLabels=[
+    {id:'role_changed',label:'My role has changed significantly'},
+    {id:'role_expectations_clear',label:'Clear understanding of expectations'},
+    {id:'day_confidence',label:'Confident in day-to-day responsibilities'},
+    {id:'skills_confidence',label:'Confident of skills to contribute'},
+  ];
+  const scoreWidgets=sqLabels.map(sq=>buildScoreWidget(sq.label,avgOf(rs,sq.id),distOf(rs,sq.id))).join('');
+  const capAvgs=CAPABILITIES.map(c=>({label:c.label,avg:avgOf(rs,c.id)})).filter(c=>c.avg>0).sort((a,b)=>a.avg-b.avg).slice(0,5);
+  const capRows=capAvgs.map(c=>`<div class="cap-row">
+    <div class="cap-lbl">${esc(c.label)}</div>
+    <div class="cap-track"><div class="cap-fill" style="width:${(c.avg/5)*100}%;background:${scCol(c.avg)}"></div></div>
+    <div class="cap-val" style="color:${scCol(c.avg)}">${c.avg.toFixed(1)}</div>
+  </div>`).join('');
+  const cf=freqOf(rs,'top_challenges');
+  const cs=Object.entries(cf).sort((a,b)=>b[1]-a[1]);
+  const mc=cs[0]?cs[0][1]:1;
+  return `<div class="score-grid">${scoreWidgets}</div>
+    ${capAvgs.length?`<div class="dlbl">Top 5 Capability Gaps</div><div class="chart-box">${capRows}</div>`:''}
+    ${cs.length?`<div class="dlbl">Challenge Frequency</div><div class="chart-box">${cs.map(([l,c])=>buildHBar(l,c,mc,'#C87D2A')).join('')}</div>`:''}`;
+}
+
+function buildCapabilitiesTab(){
+  const rs=S.responses;
+  const sorted=CAPABILITIES.map(c=>({...c,avg:avgOf(rs,c.id)})).sort((a,b)=>a.avg-b.avg);
+  const bars=sorted.map(c=>`<div class="cap-row">
+    <div class="cap-lbl" style="width:280px;flex:none">${esc(c.label)}</div>
+    <div class="cap-track" style="flex:1;width:auto"><div class="cap-fill" style="width:${c.avg>0?(c.avg/5)*100:0}%;background:${scCol(c.avg)}"></div></div>
+    <div class="cap-val" style="color:${c.avg>0?scCol(c.avg):'#D8D8D8'}">${c.avg>0?c.avg.toFixed(1):'—'}</div>
+  </div>`).join('');
+  const thResp=rs.map((_,i)=>`<th class="rh">R${i+1}</th>`).join('');
+  const trows=CAPABILITIES.map((cap,ri)=>{
+    const avg=avgOf(rs,cap.id);
+    const cells=rs.map(r=>{const v=r.data&&r.data[cap.id];return `<td class="rv" style="color:${v>0?scCol(v):'#D8D8D8'}">${v>0?v:'—'}</td>`;}).join('');
+    return `<tr><td class="ll">${esc(cap.label)}</td>${cells}<td class="av" style="color:${avg>0?scCol(avg):'#D8D8D8'}">${avg>0?avg.toFixed(1):'—'}</td></tr>`;
+  }).join('');
+  return `<div class="dlbl">All Capabilities — Lowest to Highest</div>
+    <div class="legend">🔴 &lt;2.5 Priority gap &nbsp; 🟠 2.5–3.5 Developing &nbsp; 🟢 &gt;3.5 Confident</div>
+    <div class="chart-box">${bars}</div>
+    <div class="dlbl">Individual Ratings Grid</div>
+    <div class="ovf-x"><table class="gtbl"><thead><tr><th class="lh">Capability</th>${thResp}<th class="rh">Avg</th></tr></thead><tbody>${trows}</tbody></table></div>`;
+}
+
+function buildChallengesTab(){
+  const rs=S.responses;
+  const cf=freqOf(rs,'top_challenges');
+  const mc=Math.max(...Object.values(cf),1);
+  const allBars=CHALLENGE_OPTIONS.map(o=>buildHBar(o.label,cf[o.label]||0,mc,'#C87D2A')).join('');
+  const ftSections=FT_KEYS.map(k=>{
+    const notes=rs.map(r=>r.data&&r.data['top_challenges__ft__'+k]).filter(v=>v&&v.trim());
+    if(!notes.length)return '';
+    return `<div class="dlbl" style="margin-top:16px">Notes — ${esc(k)}</div>${notes.map(n=>`<div class="qblock">${esc(n)}</div>`).join('')}`;
+  }).join('');
+  const openQ=buildQuoteBlocks(rs,'challenges_open');
+  return `<div class="dlbl">Day-to-Day Confidence</div>
+    <div style="max-width:360px;margin-bottom:28px">${buildScoreWidget('I feel confident handling my current day-to-day responsibilities.',avgOf(rs,'day_confidence'),distOf(rs,'day_confidence'))}</div>
+    <div class="dlbl">Challenge Frequency — All Options</div>
+    <div class="chart-box">${allBars}</div>
+    ${ftSections}
+    ${openQ?`<div class="dlbl" style="margin-top:16px">Open Challenges Responses</div>${openQ}`:''}`;
+}
+
+function buildDevelopmentTab(){
+  const rs=S.responses;
+  const sf=freqOf(rs,'support_types');
+  const ss=Object.entries(sf).sort((a,b)=>b[1]-a[1]);
+  const ms=ss[0]?ss[0][1]:1;
+  const spOpen=buildQuoteBlocks(rs,'skill_priorities_open');
+  const hp=buildQuoteBlocks(rs,'help_prepared');
+  const oc=buildQuoteBlocks(rs,'other_comments');
+  return `<div class="dlbl">Skills Confidence</div>
+    <div style="max-width:360px;margin-bottom:28px">${buildScoreWidget('I feel confident of the skills I have to contribute.',avgOf(rs,'skills_confidence'),distOf(rs,'skills_confidence'))}</div>
+    ${ss.length?`<div class="dlbl">Support Types Requested</div><div class="chart-box">${ss.map(([l,c])=>buildHBar(l,c,ms,'#2D7D46')).join('')}</div>`:''}
+    ${spOpen?`<div class="dlbl">Skill Areas to Develop — Open Responses</div>${spOpen}`:''}
+    ${hp?`<div class="dlbl" style="margin-top:16px">What Would Help You Excel?</div>${hp}`:''}
+    ${oc?`<div class="dlbl" style="margin-top:16px">Other Comments</div>${oc}`:''}`;
+}
+
+function buildRawDataTab(){
+  return S.responses.map((r,i)=>{
+    const isOpen=S.expanded[i];
+    const dc=r.data&&r.data.day_confidence;
+    const sc=r.data&&r.data.skills_confidence;
+    const badges=(dc>0?`<span class="rbadge" style="background:${scCol(dc)}">Day-to-day: ${dc}/5</span>`:'')+
+                  (sc>0?`<span class="rbadge" style="background:${scCol(sc)}">Skills: ${sc}/5</span>`:'');
+    const hStyle=isOpen?'background:#2B2B34':'background:#fff';
+    const numStyle=isOpen?'color:#F4D618':'color:#2B2B34';
+    const dateStyle=isOpen?'color:#888':'color:#4A4B52';
+    const chevron=isOpen?'▲':'▼';
+    let body='';
+    if(isOpen){
+      const d=r.data||{};
+      const capRows=CAPABILITIES.map(c=>{
+        const v=d[c.id];
+        return `<div class="cmini"><span class="cmini-lbl">${esc(c.label)}</span><span class="cmini-val" style="color:${v>0?scCol(v):'#D8D8D8'}">${v>0?v:'—'}</span></div>`;
+      }).join('');
+      const ftFields=FT_KEYS.map(k=>{
+        const v=d['top_challenges__ft__'+k];
+        if(!v)return '';
+        return `<div class="fld hi"><div class="fld-lbl">Note — ${esc(k)}</div><div class="fld-val">${esc(v)}</div></div>`;
+      }).join('');
+      function fld(lbl,val,hi){
+        if(!val&&val!==0)return '';
+        const dv=Array.isArray(val)?val.join(' · '):String(val);
+        if(!dv.trim()&&dv!=='0')return '';
+        return `<div class="fld${hi?' hi':''}"><div class="fld-lbl">${esc(lbl)}</div><div class="fld-val">${esc(dv)}</div></div>`;
+      }
+      body=`<div class="resp-body">
+        <div class="rsec">Role Evolution</div>
+        ${fld('Role Changed (1–5)',d.role_changed)}
+        ${fld('Expectations Clear (1–5)',d.role_expectations_clear)}
+        ${fld('Role Evolution — Open Response',d.role_evolved_open,true)}
+        <div class="rsec">Capability Ratings</div>
+        <div class="cap2col">${capRows}</div>
+        <div class="rsec">Challenges</div>
+        ${fld('Day-to-Day Confidence (1–5)',d.day_confidence)}
+        ${fld('Top Challenges',d.top_challenges)}
+        ${ftFields}
+        ${fld('Open Challenges Response',d.challenges_open,true)}
+        <div class="rsec">Development</div>
+        ${fld('Skills Confidence (1–5)',d.skills_confidence)}
+        ${fld('Support Types Wanted',d.support_types)}
+        ${fld('Skill Areas to Develop',d.skill_priorities_open,true)}
+        ${fld('What Would Help Most',d.help_prepared,true)}
+        ${fld('Other Comments',d.other_comments,true)}
+      </div>`;
+    }
+    return `<div class="resp-card">
+      <div class="resp-hdr" style="${hStyle}" onclick="toggleExp(${i})">
+        <div class="resp-hdr-l">
+          <span style="font-size:14px;font-weight:700;${numStyle}">Response #${i+1}</span>
+          <span style="font-size:11px;${dateStyle}">${r.submitted_at?new Date(r.submitted_at).toLocaleString():''}</span>
+          ${badges}
+        </div>
+        <span style="font-size:14px;color:${isOpen?'#F4D618':'#4A4B52'}">${chevron}</span>
+      </div>
+      ${body}
+    </div>`;
+  }).join('');
+}
+
+// ─── HANDLERS ─────────────────────────────────────────────────────────────────
+function scaleClick(qId,n){capture();S.answers[qId]=n;render();}
+function ratingClick(cId,n){capture();S.answers[cId]=n;render();}
+function chkChange(qId,label,maxSel,checked){
+  capture();
+  const cur=S.answers[qId]||[];
+  if(checked){if(maxSel&&cur.length>=maxSel)return;S.answers[qId]=[...cur,label];}
+  else{S.answers[qId]=cur.filter(v=>v!==label);}
+  render();
+}
+function handleNext(){
+  capture();
+  if(!validate(S.step))return render();
+  if(S.step===TOTAL-1){submitSurvey();}
+  else{S.step++;S.errors={};render();window.scrollTo(0,0);}
+}
+function handleBack(){capture();S.step--;S.errors={};render();window.scrollTo(0,0);}
+function handleReset(){S.step=0;S.answers=initAnswers();S.errors={};render();window.scrollTo(0,0);}
+function closeAdmin(){S.showAdmin=false;S.adminUnlocked=false;S.adminKey='';render();}
+function admLogin(){
+  const ki=document.getElementById('admKeyInput');
+  const k=ki?ki.value:S.adminKey;
+  if(k===ADMIN_CODE){S.adminUnlocked=true;S.adminKey='';loadResponses();}
+  else{S.adminKey='';render();setTimeout(()=>{const i=document.getElementById('admKeyInput');if(i){i.value='';i.placeholder='Incorrect code — try again';}},10);}
+}
+function setTab(t){S.adminTab=t;render();}
+function toggleExp(i){S.expanded[i]=!S.expanded[i];render();}
+function doExport(){
+  if(!S.responses.length)return;
+  const scKeys=['role_changed','role_expectations_clear','day_confidence','skills_confidence'];
+  const capKeys=CAPABILITIES.map(c=>c.id);
+  const ftKeys2=FT_KEYS.map(k=>'top_challenges__ft__'+k);
+  const chkKeys=['top_challenges','support_types'];
+  const txKeys=['role_evolved_open','challenges_open','skill_priorities_open','help_prepared','other_comments'];
+  const allKeys=['submitted_at',...scKeys,...capKeys,...chkKeys,...ftKeys2,...txKeys];
+  const hdr=allKeys.map(k=>'"'+k.replace('top_challenges__ft__',' — note: ')+'"').join(',');
+  const rows=S.responses.map(r=>allKeys.map(k=>{
+    if(k==='submitted_at')return '"'+(r.submitted_at||'')+'"';
+    const v=r.data&&r.data[k];
+    if(Array.isArray(v))return '"'+v.join('; ')+'"';
+    if(v==null)return '""';
+    return '"'+String(v).replace(/"/g,'""')+'"';
+  }).join(','));
+  const csv='\uFEFF'+[hdr,...rows].join('\n');
+  const a=document.createElement('a');
+  a.setAttribute('href','data:text/csv;charset=utf-8,'+encodeURIComponent(csv));
+  a.setAttribute('download','PMO_Survey_Responses.csv');
+  a.style.display='none';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+}
+function doClearAll(){
+  S.confirmingClear=false;
+  S.responses=[];
+  S.adminError='Responses cleared locally. Note: to delete from Google Sheet, remove rows manually.';
+  render();
+}
+
+// ─── API ──────────────────────────────────────────────────────────────────────
+async function submitSurvey(){
+  S.submitting=true;render();
+  const payload={submitted_at:new Date().toISOString(),data:{...S.answers}};
+  try{
+    const timeout=new Promise(resolve=>setTimeout(resolve,8000));
+    await Promise.race([
+      fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(payload)}),
+      timeout
+    ]);
+  }catch(e){console.error('Submit error:',e);}
+  S.submitting=false;S.step=TOTAL;render();window.scrollTo(0,0);
+}
+
+async function loadResponses(){
+  S.adminLoading=true;S.adminError='';render();
+  try{
+    const res=await fetch(SCRIPT_URL+'?action=getResponses');
+    if(!res.ok)throw new Error('Server returned '+res.status);
+    const data=await res.json();
+    S.responses=Array.isArray(data)?data:[];
+    if(!S.responses.length&&!Array.isArray(data))throw new Error('Unexpected response format');
+  }catch(e){
+    S.adminError='Could not load responses automatically ('+e.message+'). Your data is still being saved to Google Sheets — open your sheet directly to view responses.';
+  }
+  S.adminLoading=false;render();
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+render();
+</script>
+</body>
+</html>
